@@ -25,11 +25,11 @@ requirements:
     - {{ compiler('cxx') }}
   host:
     - msinttypes      # [win]
-    - openssl         # [not win]
+    - openssl         # [not win and not osx]
     - libiconv        # [osx]
     - pcre2  # [unix]
     - curl
-    #- libssh2
+    - libssh2         # [osx]
     - zlib
 
 test:
