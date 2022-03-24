@@ -3,9 +3,9 @@ MACOSX_DEPLOYMENT_TARGET:
 c_compiler:
 - clang
 c_compiler_version:
-- '10'
+- '12'
 channel_sources:
-- conda-forge,defaults
+- conda-forge
 channel_targets:
 - conda-forge main
 curl:
@@ -13,7 +13,7 @@ curl:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '10'
+- '12'
 libiconv:
 - '1.16'
 libssh2:
@@ -21,17 +21,20 @@ libssh2:
 macos_machine:
 - x86_64-apple-darwin13.4.0
 openssl:
-- 1.1.1
+- '3'
+pcre2:
+- '10.37'
 pin_run_as_build:
   curl:
     max_pin: x
   libiconv:
     max_pin: x.x
-  openssl:
-    max_pin: x.x.x
   zlib:
     max_pin: x.x
 target_platform:
 - osx-64
+zip_keys:
+- - c_compiler_version
+  - cxx_compiler_version
 zlib:
 - '1.2'
