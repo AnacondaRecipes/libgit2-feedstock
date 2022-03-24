@@ -29,7 +29,7 @@ requirements:
     - libiconv        # [osx]
     - pcre2  # [unix]
     - curl
-    - libssh2         # [osx]
+    #- libssh2         
     - zlib
 
 test:
