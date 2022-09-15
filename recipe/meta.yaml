@@ -1,5 +1,5 @@
 {% set name = "libgit2" %}
-{% set version = "1.0.1" %}
+{% set version = "1.5.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,9 +7,7 @@ package:
 
 source:
   url: https://github.com/{{ name }}/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 1775427a6098f441ddbaa5bd4e9b8a043c7401e450ed761e69a415530fea81d2
-  patches:
-    - 0001-macOS-Define-htonll-as-OSSwapInt64.patch
+  sha256: 8de872a0f201b33d9522b817c92e14edb4efad18dae95cf156cf240b2efff93e
 
 build:
   number: 0
@@ -22,6 +20,7 @@ requirements:
     - cmake
     - ninja
     - pkg-config      # [not win]
+    - sysroot_linux-64 2.17  # [linux64]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
@@ -32,135 +31,14 @@ requirements:
     - curl
     - libssh2
     - zlib
-  run:
-    - openssl         # [not win]
-    - libiconv        # [osx]
-    - curl
-    - libssh2
-    - zlib
 
 test:
   commands:
-    # Include files.
-    {% set includes = [
-            "git2.h",
-            "git2/annotated_commit.h",
-            "git2/attr.h",
-            "git2/blame.h",
-            "git2/blob.h",
-            "git2/branch.h",
-            "git2/buffer.h",
-            "git2/checkout.h",
-            "git2/apply.h",
-            "git2/cert.h",
-            "git2/cherrypick.h",
-            "git2/clone.h",
-            "git2/commit.h",
-            "git2/common.h",
-            "git2/config.h",
-            "git2/cred_helpers.h",
-            "git2/credential.h",
-            "git2/credential_helpers.h",
-            "git2/deprecated.h",
-            "git2/describe.h",
-            "git2/diff.h",
-            "git2/errors.h",
-            "git2/filter.h",
-            "git2/global.h",
-            "git2/graph.h",
-            "git2/ignore.h",
-            "git2/index.h",
-            "git2/indexer.h",
-            "git2/mailmap.h",
-            "git2/merge.h",
-            "git2/message.h",
-            "git2/net.h",
-            "git2/notes.h",
-            "git2/object.h",
-            "git2/odb.h",
-            "git2/odb_backend.h",
-            "git2/oid.h",
-            "git2/oidarray.h",
-            "git2/pack.h",
-            "git2/patch.h",
-            "git2/pathspec.h",
-            "git2/proxy.h",
-            "git2/rebase.h",
-            "git2/refdb.h",
-            "git2/reflog.h",
-            "git2/refs.h",
-            "git2/refspec.h",
-            "git2/remote.h",
-            "git2/repository.h",
-            "git2/reset.h",
-            "git2/revert.h",
-            "git2/revparse.h",
-            "git2/revwalk.h",
-            "git2/signature.h",
-            "git2/stash.h",
-            "git2/status.h",
-            "git2/stdint.h",
-            "git2/strarray.h",
-            "git2/submodule.h",
-            "git2/sys/alloc.h",
-            "git2/sys/commit.h",
-            "git2/sys/config.h",
-            "git2/sys/cred.h",
-            "git2/sys/credential.h",
-            "git2/sys/diff.h",
-            "git2/sys/filter.h",
-            "git2/sys/hashsig.h",
-            "git2/sys/index.h",
-            "git2/sys/mempack.h",
-            "git2/sys/merge.h",
-            "git2/sys/odb_backend.h",
-            "git2/sys/openssl.h",
-            "git2/sys/path.h",
-            "git2/sys/refdb_backend.h",
-            "git2/sys/reflog.h",
-            "git2/sys/refs.h",
-            "git2/sys/repository.h",
-            "git2/sys/stream.h",
-            "git2/sys/transport.h",
-            "git2/tag.h",
-            "git2/trace.h",
-            "git2/transaction.h",
-            "git2/transport.h",
-            "git2/tree.h",
-            "git2/types.h",
-            "git2/version.h",
-            "git2/worktree.h",
-    ] %}
-
-    # Linux libraries.
-    {% set linux_libs = [
-            "libgit2.so",
-    ] %}
-
-    # OSX libraries.
-    {% set osx_libs = [
-            "libgit2.dylib",
-    ] %}
-
-    # Windows libraries.
-    {% set win_libs = [
-            "%LIBRARY_BIN%\\git2.dll",
-            "%LIBRARY_LIB%\\git2.lib"
-    ] %}
-
-    {% for include in includes %}
-    - test -f $PREFIX/include/{{ include }}                 # [not win]
-    - if not exist %LIBRARY_INC%\\{{ include }} exit 1      # [win]
-    {% endfor %}
-
-    {% set libs = linux_libs %}                             # [linux]
-    {% set libs = osx_libs %}                               # [osx]
-    {% set libs = win_libs %}                               # [win]
-
-    {% for lib in libs %}
-    - test -f $PREFIX/lib/{{ lib }}                         # [not win]
-    - if not exist {{ lib }} exit 1                         # [win]
-    {% endfor %}
+    - test -f $PREFIX/include/git2.h                 # [not win]
+    - if not exist %LIBRARY_INC%\\git2.h exit 1      # [win]
+    - test -f $PREFIX/lib/libgit2${SHLIB_EXT}        # [unix]
+    - if not exist %LIBRARY_LIB%\\git2.lib exit 1    # [win]
+    - if not exist %LIBRARY_BIN%\\git2.dll exit 1    # [win]
 
 about:
   home: https://libgit2.github.com
