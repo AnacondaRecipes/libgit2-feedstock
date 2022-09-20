@@ -31,10 +31,16 @@ requirements:
     - curl
     - libssh2
     - zlib
+  run:
+    - openssl         # [not win]
+    - libiconv        # [osx]
+    - curl
+    - libssh2
+    - zlib
 
 test:
   commands:
-     # Include files.
+    # Include files.
     {% set includes = [
             "git2.h",
             "git2/annotated_commit.h",
