@@ -9,6 +9,7 @@ cmake ^
 	-DLIB_INSTALL_DIR=%LIBRARY_LIB%     ^
 	-DINCLUDE_INSTALL_DIR=%LIBRARY_INC% ^
 	-DSTATIC_CRT=off                    ^
+        -DUSE_SSH=ON                        ^
 	..
 
 ninja install
