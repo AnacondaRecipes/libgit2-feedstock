@@ -20,19 +20,18 @@ requirements:
     - cmake
     - ninja
     - pkg-config      # [not win]
-    - sysroot_linux-64 2.17  # [linux64]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
     - msinttypes      # [win]
-    - openssl         # [not win]
+    - openssl         # [linux]
     - libiconv        # [osx]
     - pcre2  # [unix]
     - curl
     - libssh2
     - zlib
   run:
-    - openssl         # [not win]
+    - openssl         # [linux]
     - libiconv        # [osx]
     - curl
     - libssh2
