@@ -165,6 +165,7 @@ about:
   license: GPL-2.0-only WITH GCC-exception-2.0
   license_file: COPYING
   license_family: GPL2
+  license_url: https://github.com/libgit2/libgit2/blob/{{ version }}/COPYING
   summary: 'libgit2 is a portable, pure C implementation of the Git core methods provided as a re-entrant linkable library with a solid API, allowing you to write native speed custom Git applications in any language which supports C bindings.'
 
   # The remaining entries in this section are optional, but recommended
@@ -175,6 +176,7 @@ about:
     which supports C bindings.
   dev_url: https://github.com/libgit2/libgit2
   doc_url: https://libgit2.org/docs/
+  doc_source_url: https://github.com/libgit2/libgit2/tree/{{ version }}/docs
 
 extra:
   recipe-maintainers:
