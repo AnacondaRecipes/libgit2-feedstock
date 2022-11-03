@@ -1,5 +1,5 @@
 {% set name = "libgit2" %}
-{% set version = "1.0.1" %}
+{% set version = "1.5.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,9 +7,7 @@ package:
 
 source:
   url: https://github.com/{{ name }}/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 1775427a6098f441ddbaa5bd4e9b8a043c7401e450ed761e69a415530fea81d2
-  patches:
-    - 0001-macOS-Define-htonll-as-OSSwapInt64.patch
+  sha256: 8de872a0f201b33d9522b817c92e14edb4efad18dae95cf156cf240b2efff93e
 
 build:
   number: 0
@@ -26,14 +24,14 @@ requirements:
     - {{ compiler('cxx') }}
   host:
     - msinttypes      # [win]
-    - openssl         # [not win]
+    - openssl         # [linux]
     - libiconv        # [osx]
     - pcre2  # [unix]
     - curl
     - libssh2
     - zlib
   run:
-    - openssl         # [not win]
+    - openssl         # [linux]
     - libiconv        # [osx]
     - curl
     - libssh2
@@ -163,9 +161,11 @@ test:
     {% endfor %}
 
 about:
-  home: https://libgit2.github.com
+  home: https://libgit2.org/
   license: GPL-2.0-only WITH GCC-exception-2.0
   license_file: COPYING
+  license_family: GPL2
+  license_url: https://github.com/libgit2/libgit2/blob/v{{ version }}/COPYING
   summary: 'libgit2 is a portable, pure C implementation of the Git core methods provided as a re-entrant linkable library with a solid API, allowing you to write native speed custom Git applications in any language which supports C bindings.'
 
   # The remaining entries in this section are optional, but recommended
@@ -174,6 +174,9 @@ about:
     provided as a re-entrant linkable library with a solid API, allowing
     you to write native speed custom Git applications in any language
     which supports C bindings.
+  dev_url: https://github.com/libgit2/libgit2
+  doc_url: https://libgit2.org/docs/
+  doc_source_url: https://github.com/libgit2/libgit2/tree/v{{ version }}/docs
 
 extra:
   recipe-maintainers:

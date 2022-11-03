@@ -8,6 +8,11 @@ cmake .. \
     -DCMAKE_FIND_ROOT_PATH=$PREFIX \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DREGEX_BACKEND=pcre2 \
-    -DCMAKE_BUILD_TYPE=Release
+    -DCMAKE_BUILD_TYPE=Release \
+    -DUSE_SSH=ON
 
-ninja install
+echo "Building..."
+ninja -j${CPU_COUNT} || exit 1
+
+echo "Installing..."
+ninja install || exit 1
