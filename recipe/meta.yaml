@@ -1,5 +1,5 @@
 {% set name = "libgit2" %}
-{% set version = "1.5.0" %}
+{% set version = "1.6.4" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/{{ name }}/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 8de872a0f201b33d9522b817c92e14edb4efad18dae95cf156cf240b2efff93e
+  sha256: d25866a4ee275a64f65be2d9a663680a5cf1ed87b7ee4c534997562c828e500d
 
 build:
   number: 0
@@ -23,15 +23,15 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
-    - msinttypes      # [win]
-    - openssl         # [linux]
-    - libiconv        # [osx]
-    - pcre2  # [unix]
-    - curl
-    - libssh2
-    - zlib
+    - msinttypes r26  # [win]
+    - openssl {{ openssl }}  # [linux]
+    - libiconv 1.16  # [osx]
+    - pcre2 10.42  # [unix]
+    - curl 7.88.1
+    - libssh2 1.10.0
+    - zlib {{ zlib }}
   run:
-    - openssl         # [linux]
+    - openssl 3.*  # [linux]
     - libiconv        # [osx]
     - curl
     - libssh2
@@ -165,7 +165,6 @@ about:
   license: GPL-2.0-only WITH GCC-exception-2.0
   license_file: COPYING
   license_family: GPL2
-  license_url: https://github.com/libgit2/libgit2/blob/v{{ version }}/COPYING
   summary: 'libgit2 is a portable, pure C implementation of the Git core methods provided as a re-entrant linkable library with a solid API, allowing you to write native speed custom Git applications in any language which supports C bindings.'
 
   # The remaining entries in this section are optional, but recommended
@@ -176,7 +175,6 @@ about:
     which supports C bindings.
   dev_url: https://github.com/libgit2/libgit2
   doc_url: https://libgit2.org/docs/
-  doc_source_url: https://github.com/libgit2/libgit2/tree/v{{ version }}/docs
 
 extra:
   recipe-maintainers:
