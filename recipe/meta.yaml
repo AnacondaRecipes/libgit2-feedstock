@@ -31,7 +31,8 @@ requirements:
     - libssh2 1.10.0
     - zlib {{ zlib }}
   run:
-    - openssl 3.*  # [linux]
+    # exact pin for OpenSSL handled through openssl run_exports
+    - openssl  # [linux]
     - libiconv        # [osx]
     - curl
     - libssh2
