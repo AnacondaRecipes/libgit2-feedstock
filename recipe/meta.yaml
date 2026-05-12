@@ -43,8 +43,6 @@ requirements:
 
 about:
   home: https://libgit2.org
-  dev_url: https://github.com/libgit2/libgit2
-  doc_url: https://libgit2.org/docs/
   license: GPL-2.0-only WITH GCC-exception-2.0
   license_family: GPL
   license_file: COPYING
