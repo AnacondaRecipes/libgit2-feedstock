@@ -24,7 +24,6 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
-    - msinttypes r26  # [win]
     - openssl {{ openssl }}  # [linux]
     - libiconv {{ libiconv }}  # [osx]
     - pcre2 {{ pcre2 }} # [unix]
