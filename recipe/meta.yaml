@@ -10,7 +10,7 @@ source:
   sha256: d532172d7ab24d2a25944e2434212d63ee85f3650e97b5f7579e7f201a78ad64
 
 build:
-  number: 1
+  number: 2
   run_exports:
     # SONAME is based on minor version
     - {{ pin_subpackage("libgit2", max_pin="x.x") }}
@@ -26,10 +26,10 @@ requirements:
   host:
     - msinttypes r26  # [win]
     - openssl {{ openssl }}  # [linux]
-    - libiconv 1.16  # [osx]
+    - libiconv {{ libiconv }}  # [osx]
     - pcre2 {{ pcre2 }} # [unix]
-    - curl 7.88.1
-    - libssh2 1.10.0
+    - curl {{ libcurl }}
+    - libssh2 {{ libssh2 }}
     - zlib {{ zlib }}
   run:
     # exact pin for OpenSSL handled through openssl run_exports
